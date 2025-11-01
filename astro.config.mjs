@@ -7,11 +7,14 @@ import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])]
+  integrations: [react(), markdoc(), keystatic()],
+  adapter: cloudflare({ imageService: "compile" })
 });

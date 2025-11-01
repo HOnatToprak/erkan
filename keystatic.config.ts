@@ -1,8 +1,12 @@
-import { collection, config, fields, singleton } from "@keystatic/core";
+import { config, fields, singleton } from "@keystatic/core";
 
 export default config({
   storage: {
-    kind: 'local',
+    kind: 'github',
+    repo: {
+      owner: "HOnatToprak",
+      name: "erkan",
+    }
   },
   collections: {
   },
