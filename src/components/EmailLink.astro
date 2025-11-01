@@ -1,0 +1,7 @@
+---
+const { email } = Astro.props as { email: string };
+import emailIcon from '../assets/social/email.svg';
+import SocialLink from './SocialLink.astro';
+---
+
+<SocialLink href={`mailto:${email}`} src={emailIcon.src} alt="Email" text={email} />

@@ -1,0 +1,13 @@
+---
+const { href, src, alt, text } = Astro.props as {
+  href: string;
+  src: string;
+  alt?: string;
+  text: string;
+};
+---
+
+<a href={href} class="w-full flex items-center gap-2 text-slate-700 hover:text-slate-900 justify-center sm:justify-start" aria-label={alt ?? text}>
+  <img src={src} alt={alt ?? text} class="w-6 h-6" />
+  <span class="underline">{text}</span>
+</a>

@@ -1,0 +1,7 @@
+---
+const { profileId } = Astro.props as { profileId: string };
+import instagram from '../assets/social/instagram.svg';
+import SocialLink from './SocialLink.astro';
+---
+
+<SocialLink href={`https://instagram.com/${profileId}`} src={instagram.src} alt="Instagram" text={`@${profileId}`} />
