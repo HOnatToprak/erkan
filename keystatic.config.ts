@@ -1,4 +1,4 @@
-import { config, fields, singleton } from "@keystatic/core";
+import { collection, config, fields, singleton } from "@keystatic/core";
 
 export default config({
   storage: {
@@ -9,6 +9,35 @@ export default config({
     }
   },
   collections: {
+    notesArchive: collection({
+      label: 'Notes Archive',
+      slugField: 'title',
+      schema: {
+        title: fields.slug({
+          name: {
+            label: 'Title',
+            description: 'The title of the note',
+          },
+          slug: {
+            label: 'File name',
+            description: 'The file name of the note',
+          }
+        }),
+        author: fields.text({
+          label: 'Author',
+          description: 'The author of the note',
+        }),
+        file: fields.file({
+          label: 'Note File',
+          description: 'Upload the note file here',
+          directory: "public/notes",
+          publicPath: "notes",
+          validation: {
+            isRequired: true,
+          }
+        })
+      }
+    }),
   },
   singletons: {
     home: singleton({

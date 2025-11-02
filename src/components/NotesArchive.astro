@@ -1,0 +1,36 @@
+---
+import {reader} from '../reader';
+
+const data = (await reader.collections.notesArchive.all()).map(note => ({
+  ...note,
+  entry: {
+    ...note.entry,
+    file: note.entry.file.startsWith('/') ? note.entry.file : `/${note.entry.file}`,
+  }
+}));
+---
+  <main class="min-h-screen p-8">
+    <section class="mx-auto w-full max-w-5xl">
+      <header class="flex items-end justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-semibold text-slate-900">Nota Arşivi</h1>
+          <p class="mt-1 text-slate-600">Kullanışlı bağlantılar ve referansların bir koleksiyonu.</p>
+        </div>
+        <a href="/" class="hidden sm:inline-flex items-center rounded-xl bg-slate-900 text-white px-4 py-2 shadow hover:bg-slate-700 transition focus:outline-hidden focus:ring-2 focus:ring-slate-400">Home</a>
+      </header>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {data.map(note => (
+          <a href={note.entry.file} class="group block rounded-2xl border border-slate-200 bg-white/70 backdrop-blur-sm p-5 shadow-sm ring-1 ring-white/60 hover:shadow-md hover:border-slate-300 transition" rel="noopener noreferrer">
+            <div class="flex items-center justify-between">
+              <h2 class="text-lg font-medium text-slate-900 group-hover:text-slate-700">{note.entry.title}</h2>
+              <span class="ml-3 text-slate-400 group-hover:text-slate-500" aria-hidden="true">→</span>
+            </div>
+            {note.entry.author && (
+              <p class="mt-2 text-sm text-slate-600">{note.entry.author}</p>
+            )}
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
